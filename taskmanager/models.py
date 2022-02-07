@@ -5,6 +5,8 @@ class Category(db.Model):
     # schema for the category model
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(25), unique=True, nullable=False)
+    # the backredf and cascade effect make sure that if we delete a category, all the tasks
+    # under that category get deleted as well.
     tasks = db.relationship("Task", backref="category", cascade="all, delete", lazy=True)
 
 
